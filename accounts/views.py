@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 from vendor.forms import VendorForm
 from .models import User, UserProfile
+from vendor.models import Vendor
 from django.contrib import messages,auth
 from .utils import detectUser,send_verification_email
 from django.contrib.auth.decorators import login_required,user_passes_test

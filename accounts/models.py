@@ -89,7 +89,7 @@ class User(AbstractBaseUser):
         user_role ='Customer'
       else:
         user_role ='Admin'
-      print(self.role)
+    #   print(self.role)
       return user_role
 
 
@@ -114,5 +114,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.email
 
-
+    def full_address(self):
+        return f'{self.address_line1}, {self.address_line2}'
 # post_save.connect(post_save_create_profile_receiver,sender=User)

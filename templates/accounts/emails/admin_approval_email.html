@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+Hi {{user.first_name}}
+{% if is_approved %}
+  Congratulations! your restaurant has been approved.
+{%else%}
+We are sorry! You are not able to publishing your foods
+{% endif %}
+Please click on below link to confirm your registration.
+
+<!-- http:{{domain}}{% url 'activate' uidb64=uid token=token %} -->
+
+
+{% endautoescape %}
