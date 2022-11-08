@@ -65,7 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'accounts.context_processors.vendor_get'
+                'accounts.context_processors.vendor_get',
+                'accounts.context_processors.get_google_api',
             ],
         },
     },
@@ -153,3 +154,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tursunovmuzaffar486@gmail.com'
 EMAIL_HOST_PASSWORD = 'muzaffar*96#'
 DEFAULT_FROM_EMAIL ='tursunovmuzaffar486@gmail.com'
+
+
+GOOGLE_API_KEY=''
