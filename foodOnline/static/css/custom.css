@@ -14,7 +14,7 @@ animation-duration: 8s;
 z-index: 99;
 
 }
-.btn.btn-info{
+.btn{
   padding: 2px 1.75em;
   font-size: 12px;
   cursor: pointer;
