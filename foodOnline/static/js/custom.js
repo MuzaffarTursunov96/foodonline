@@ -126,7 +126,7 @@ function add_to_cart(elem){
 
           applyCartAmounts(
             response.cart_amount['subtotal'],
-            response.cart_amount['tax'],
+            response.cart_amount['tax_dict'],
             response.cart_amount['grand_total']
             );
 
@@ -158,7 +158,7 @@ function decrease_from_cart(elem){
 
           applyCartAmounts(
             response.cart_amount['subtotal'],
-            response.cart_amount['tax'],
+            response.cart_amount['tax_dict'],
             response.cart_amount['grand_total']
             );
 
@@ -189,7 +189,7 @@ function delete_cart(elem){
 
           applyCartAmounts(
             response.cart_amount['subtotal'],
-            response.cart_amount['tax'],
+            response.cart_amount['tax_dict'],
             response.cart_amount['grand_total']
             );
           removeCartItem(0,cart_id);
@@ -214,11 +214,70 @@ function checkEmptyCart(){
   }
 }
 
-function applyCartAmounts(subtotal,tax,grant_total){
+function applyCartAmounts(subtotal,tax_dict,grant_total){
   if( window.location.pathname == '/cart/'){
     $('#subtotal').html(subtotal);
-    $('#tax').html(tax);
     $('#total').html(grant_total);
+
+    for(key1 in tax_dict){
+      for(key2 in tax_dict[key1]){
+        $('#tax-'+key1).html(tax_dict[key1][key2])
+      }
+    }
   }
 
 }
+
+
+
+
+
+$('.add_hour').on('click',function(e){
+  e.preventDefault();
+  var day =document.getElementById('id_day').value;
+  var from_hour =document.getElementById('id_from_hour').value;
+  var to_hour =document.getElementById('id_to_hour').value;
+  var is_closed =document.getElementById('id_is_closed').checked;
+  // var csrftoken =document.getElementsByName('csrfmiddlewaretoken').value;
+  var csrftoken =$('input[name=csrfmiddlewaretoken]').val();
+  var url =document.getElementById('add_hour_url').value;
+
+  if(is_closed){
+    is_closed='True'
+    condition ='day !=""'
+  }else{
+    is_closed='False'
+    condition="day != '' && from_hour != '' && to_hour != '' "
+  }
+  // console.log(csrftoken);
+  if(eval(condition)){
+    $.ajax({
+      type:"POST",
+      url:url,
+      data:{
+        'day':day,
+        'from_hour':from_hour,
+        'to_hour':to_hour,
+        'is_closed':is_closed,
+        'csrfmiddlewaretoken':csrftoken
+      },
+      success:function(response){
+        console.log(response);
+        if (response.status == 'success'){
+            if(response.is_closed =='Closed'){
+              html ='<tr><td >Closed</td><td><a href="#">Remove</a></td></tr>'
+            }else{
+              html ='<tr><td >'+response.day+'</td><td>'+response.from_hour+'-'+response.to_hour+'</td><td><a href="#">Remove</a></td></tr>'
+            }
+            $('.opening_hours').append(html);
+            document.getElementById("opening_hours").reset();
+        }else{
+          swal(response.message,'','error');
+        }
+      }
+    });
+  }else{
+    swal('Please fill all fields!','','info')
+  }
+
+});

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'includes/alerts.html' %}
+
+<!-- Main Section Start -->
+<div class="main-section">
+  {% include 'includes/cover.html'%}
+  <div class="page-section account-header buyer-logged-in">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+         <!--Load sidebar here-->
+         {% include 'includes/v_sidebar.html' %}
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <div class="user-dashboard loader-holder">
+            <div class="user-holder">
+              <h5 class="text-uppercase">Openig Hours</h5>
+									<!-- My Restaurants Form Start -->
+                  <br>
+                
+                    
+                
+									<!-- My Restaurants Form End -->
+                  <table class="table  table-hover opening_hours">
+                    <tbody>
+                      {% for hour in opening_hours %}
+                      <tr>
+                       
+                        <td >{{hour}}</td>
+                        <td>{% if hour.is_closed %}Closed{% else %} {{hour.from_hour}} - {{hour.to_hour}} {% endif %}</td>
+                        <td><a href="#">Remove</a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <br>
+                 
+                  <form  id="opening_hours">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{form.day}}
+                      </div>
+                      <div class="col-md-2">
+                        {{form.from_hour}}
+                      </div>
+                      <div class="col-md-2">
+                        {{form.to_hour}}
+                      </div>
+                      <div class="col-md-3">
+                        {{form.is_closed}} Set as Closed
+                      </div>
+                      <div class="col-md-2">
+                        <input type="hidden" value="{% url 'add_opening_hours' %}" id="add_hour_url" >
+                        <button class="btn btn-success add_hour " >
+                          Add Hours
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Section End -->
+{% endblock %}
