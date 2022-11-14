@@ -12,6 +12,7 @@ urlpatterns = [
     path('', home,name='home'),
     path('accounts/',include('accounts.urls')),
     path('vendor/', include('vendor.urls')),
+    path('customer/', include('customers.urls')),
     path('marketplace/',include('marketplace.urls')),
 
     path('cart/',MarketplaceViews.cart,name='cart'),

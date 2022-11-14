@@ -27,7 +27,7 @@ def get_cart_amounts(request):
   tax=0
   grant_total =0
   d='sscsscdcsdjkasbiyLIN?mC/NLKCNsdLcn'
-  
+  tax_dict={}
   if request.user.is_authenticated:
     cart_items =Cart.objects.filter(user=request.user)
     for item in cart_items:
@@ -36,7 +36,7 @@ def get_cart_amounts(request):
     
     get_tax = Tax.objects.filter(is_active=True)
     
-    tax_dict={}
+    
     for i in get_tax:
       tax_type = i.tax_type
       tax_percentage =i.tax_percentage
