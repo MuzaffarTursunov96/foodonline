@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,7 @@ TEMPLATES = [
                 'accounts.context_processors.vendor_get',
                 'accounts.context_processors.get_user_profile',
                 'accounts.context_processors.get_google_api',
+                'accounts.context_processors.get_paypal_client_id',
                 'marketplace.context_processors.get_cart_counter',
                 'marketplace.context_processors.get_cart_amounts',
             ],
@@ -160,7 +162,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tursunovmuzaffar486@gmail.com'
-EMAIL_HOST_PASSWORD = 'muzaffar*96#'
+EMAIL_HOST_PASSWORD = 'zgjlxbccxjwpyssx'
 DEFAULT_FROM_EMAIL ='tursunovmuzaffar486@gmail.com'
 
 
@@ -170,3 +172,8 @@ GOOGLE_API_KEY=''
 os.environ['PATH'] = 'c:\\Users\\Muzaffar\\AppData\\Local\\Programs\\Python\\Python37\\Lib\\site-packages\\osgeo' + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] =  'c:\\Users\\Muzaffar\\AppData\\Local\\Programs\\Python\\Python37\Lib\\site-packages\\osgeo\\data\\proj' + ';' + os.environ['PATH']
 GDAL_LIBRARY_PATH = 'c:\\Users\\Muzaffar\\AppData\\Local\\Programs\\Python\\Python37\\Lib\\site-packages\\osgeo\\gdal304.dll'
+
+
+PAYPAL_CLIENT_ID='test'
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY ='same-origin-allow-popups'

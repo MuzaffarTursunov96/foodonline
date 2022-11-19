@@ -165,7 +165,7 @@ def edit_food(request,pk=None):
       foodtitle=form.cleaned_data['food_title']
       food =form.save(commit=False)
       food.vendor =get_vendor(request)
-      category.slug=slugify(foodtitle)
+      food.slug=slugify(foodtitle)
       form.save()
       messages.success(request,'Food updated successfully!')
       return redirect('fooditems_by_category',food.category.id)
