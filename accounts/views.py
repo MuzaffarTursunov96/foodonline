@@ -12,6 +12,7 @@ from django.utils.http import urlsafe_base64_decode
 from .forms import UserForm
 from django.contrib.auth.tokens import default_token_generator
 from django.template.defaultfilters import slugify
+from orders.models import Order
 
 # Create your views here.
 
@@ -133,7 +134,14 @@ def vendorDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def customerDashboard(request):
-  return render(request,'accounts/customerDashboard.html')
+  orders = Order.objects.filter(user=request.user,is_ordered=True)
+  recent_orders=orders[:5]
+  context ={
+    'orders':orders,
+    'orders_count':orders.count(),
+    'recent_orders':recent_orders
+  }
+  return render(request,'accounts/customerDashboard.html',context)
 
 def activate(request,uidb64, token):
   try:
