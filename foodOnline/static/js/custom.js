@@ -102,6 +102,7 @@ $('.item_qty').each(function(){
   $('#'+the_id).html(qty);
   // console.log(the_id);
 });
+$('#myOrder').DataTable();
 });
 
 function add_to_cart(elem){
